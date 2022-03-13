@@ -1,20 +1,26 @@
 pipeline {
     agent any
     stages {
-        stage("Build Maven") {
-            steps {
-                sh 'mvn -B clean package'
+        stage('Preparation') { 
+            steps{
+                
+                git 'https://github.com/yassir28/javaproject.git'
+
             }
+        
         }
-        stage("Run Gatling") {
+        stage('Build') {
             steps {
-                sh 'mvn gatling:test'
+                sh"sudo javac app.java"
+                sh "java HelloWorld"
             }
-            post {
-                always {
-                    gatlingArchive()
-                }
+            
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing'
             }
+            
         }
     }
 }
