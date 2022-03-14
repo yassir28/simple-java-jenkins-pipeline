@@ -18,35 +18,17 @@ pipeline {
                 junit '**/target/*.xml' 
             }
         }
-        stage('Deploy') {
+        stage('Deploy to Kubernetes Cluster') {
             when {
               expression {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
               }
             }
             steps {
-                sh 'make publish'
+                sh  'kubectl run javapp --image=my-java-app --port=80'           
+                        
             }
         }
-        
-        stage('Build and Push Docker Image...') {
-            steps {
-                script {
-                    // DOCKER HUB
-                      
-                    /* Build the container image */            
-                    def dockerImage = docker.build("my-image:${env.BUILD_ID}")
-                      
-                    /* Push the container to the custom Registry */
-                    dockerImage.push()
-                      
-                    
-                    /* Remove docker image*/
-                    sh 'docker rmi -f my-image:${env.BUILD_ID}'   
-               }
-            } 
-        }
-
 
     }
 }
