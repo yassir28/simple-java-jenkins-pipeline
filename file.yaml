@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-deployment
+  labels:
+    app: java
+spec:
+  containers: 
+  - name: java
+    image: my-java-app:latest

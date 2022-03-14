@@ -6,7 +6,7 @@ pipeline {
                 /*sh"sudo javac app.java"
                 sh "java HelloWorld"*/
                 sh "sudo docker build -t my-java-app ."
-                sh "sudo docker run --rm --name my-running-app my-java-app"
+               // sh "sudo docker run --rm --name my-running-app my-java-app"
 
             }
             
@@ -25,7 +25,8 @@ pipeline {
               }
             }
             steps {
-                sh  'kubectl run javapp --image=my-java-app --port=80'           
+                //sh  'kubectl run javapp --image=my-java-app --port=80'           
+                kubernetesDeploy(configs:"file.yaml", kubeconfigId: "mykubeconfig")
                         
             }
         }
