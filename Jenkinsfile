@@ -3,8 +3,11 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh"sudo javac app.java"
-                sh "java HelloWorld"
+                /*sh"sudo javac app.java"
+                sh "java HelloWorld"*/
+                sudo docker build -t my-java-app .
+                sudo docker run -it --rm --name my-running-app my-java-app
+
             }
             
         }
@@ -24,6 +27,24 @@ pipeline {
             steps {
                 sh 'make publish'
             }
+        }
+        
+        stage('Build and Push Docker Image...') {
+            steps {
+                script {
+                    // DOCKER HUB
+                      
+                        /* Build the container image */            
+                        def dockerImage = docker.build("my-image:${env.BUILD_ID}")
+                      
+                        /* Push the container to the custom Registry */
+                        dockerImage.push()
+                      
+                    }
+                    /* Remove docker image*/
+                    sh 'docker rmi -f my-image:${env.BUILD_ID}'   
+               }
+            } 
         }
 
 
