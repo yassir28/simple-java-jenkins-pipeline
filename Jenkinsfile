@@ -27,9 +27,9 @@ pipeline {
             }
             steps {
                 //sh  'sudo kubectl run javapp --image=my-java-app --port=80'
-                sh 'chmod +rwx /home/boras/.minikube/ca.crt'
-                sh 'chmod +rwx /home/boras/.minikube/profiles/minikube/client.crt'
-                sh 'chmod +rwx /home/boras/.minikube/profiles/minikube/client.key'
+                sh 'sudo chmod +rwx /home/boras/.minikube/ca.crt'
+                sh 'sudo chmod +rwx /home/boras/.minikube/profiles/minikube/client.crt'
+                sh 'sudo chmod +rwx /home/boras/.minikube/profiles/minikube/client.key'
                 kubernetesDeploy(configs:"file.yaml", kubeconfigId: "mykubeconfig")
                 //sh "sudo kubectl create -f file.yaml"
                         
