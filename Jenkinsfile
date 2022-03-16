@@ -26,9 +26,9 @@ pipeline {
               }
             }
             steps {
-                sh  'sudo kubectl run javapp --image=my-java-app --port=80'           
+                //sh  'sudo kubectl run javapp --image=my-java-app --port=80'           
                 //kubernetesDeploy(configs:"file.yaml", kubeconfigId: "mykubeconfig")
-                //sh "kubectl create -f file.yaml"
+                sh "kubectl create -f file.yaml"
                         
             }
         }
