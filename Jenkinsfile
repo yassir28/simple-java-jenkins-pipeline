@@ -17,7 +17,18 @@ pipeline {
                 sh 'make check || true' 
                 junit '**/target/*.xml' 
             }
-        }
+        stage('List pods') {
+            withKubeConfig([credentialsId: '<credential-id>',
+                    caCertificate: '<ca-certificate>',
+                    serverUrl: '<api-server-address>',
+                    contextName: '<context-name>',
+                    clusterName: '<cluster-name>',
+                    namespace: '<namespace>'
+                    ]) {
+                sh 'kubectl get pods'
+    }
+  }
+
         stage('Deploy to Kubernetes Cluster') {
             when {
               expression {
