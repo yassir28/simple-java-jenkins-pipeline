@@ -5,7 +5,7 @@ pipeline {
             steps {
                 /*sh"sudo javac app.java"
                 sh "java HelloWorld"*/
-                sh "sudo docker build -t my-java-app ."
+                sh "sudo docker build -t my-java-app:v1 ."
                // sh "sudo docker run --rm --name my-running-app my-java-app"
 
             }

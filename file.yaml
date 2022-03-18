@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: app-deployment
+  name: app-deployment-v1
   labels:
     app: java
 spec:
   containers: 
   - name: java
-    image: my-java-app:latest
+    image: my-java-app:v1
     imagePullPolicy: Never
     resources:
       limits:
