@@ -26,6 +26,7 @@ pipeline {
               }
             }
             steps {
+                sh 'eval $(minikube docker-env)'
                 //sh  'sudo kubectl run javapp --image=my-java-app --port=80'
                 kubernetesDeploy(configs:"file.yaml", kubeconfigId: "mykubeconfig")
                 //sh "sudo kubectl create -f file.yaml"
